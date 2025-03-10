@@ -41,8 +41,17 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // ⚠️ Deshabilita CSRF si usas APIs REST
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/login", "/api/auth/register").permitAll() // 🔹 Permitir acceso público a register
-                        .anyRequest().authenticated()
+                                // 🔹 Permitir acceso a Swagger UI
+                                .requestMatchers(
+                                        "/swagger-ui/**",
+                                        "/swagger-ui.html",
+                                        "/v3/api-docs/**",
+                                        "/api-docs",
+                                        "/v3/api-docs.yaml"
+                                ).permitAll()
+                                // 🔹 Permitir login y registro
+                                .requestMatchers("/api/auth/login", "/api/auth/register").permitAll()
+                        // 🔹 Todas las demás rutas requieren autenticación                        .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

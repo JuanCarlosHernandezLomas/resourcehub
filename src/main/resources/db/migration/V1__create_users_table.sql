@@ -3,7 +3,9 @@
 -- ======================================
 CREATE TABLE users (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    employee_id VARCHAR(50) NOT NULL UNIQUE,
+    username VARCHAR(50) UNIQUE, -- Opcional, si el usuario no es un empleado
+    password VARCHAR(255),       -- Opcional, solo si el usuario tiene autenticación
+    employee_id VARCHAR(50) UNIQUE,
     name VARCHAR(100) NOT NULL,
     job_title VARCHAR(100) NOT NULL,
     experience_level ENUM('JUNIOR', 'MID', 'SENIOR') NOT NULL,
@@ -99,13 +101,5 @@ CREATE TABLE roles (
     name VARCHAR(50) NOT NULL UNIQUE
 );
 
--- ======================================
--- Tabla de Relación Usuario-Roles
--- ======================================
-CREATE TABLE users_roles (
-    user_id BIGINT NOT NULL,
-    role_id BIGINT NOT NULL,
-    PRIMARY KEY (user_id, role_id),
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE
-);
+
+

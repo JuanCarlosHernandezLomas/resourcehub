@@ -5,7 +5,14 @@ import com.resourcehub.resourcehub.entity.AvailabilityStatus;
 import com.resourcehub.resourcehub.entity.ExperienceLevel;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class CreateUserDTO {
+
+    private String username;
+    private String password;
+    private String getEmployeeId;
 
     @NotNull(message = "El ID del empleado es obligatorio")
     private String employeeId;
@@ -24,10 +31,36 @@ public class CreateUserDTO {
 
     @NotNull(message = "La ubicación es obligatoria")
     private String location;
+    private Set<String> roles= new HashSet<>();
 
-    public CreateUserDTO() {}
+    public CreateUserDTO() {
+    }
 
     // Getters y Setters
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getGetEmployeeId() {
+        return getEmployeeId;
+    }
+
+    public void setGetEmployeeId(String getEmployeeId) {
+        this.getEmployeeId = getEmployeeId;
+    }
 
     public String getEmployeeId() {
         return employeeId;
@@ -75,5 +108,13 @@ public class CreateUserDTO {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public Set<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
     }
 }
